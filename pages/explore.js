@@ -1,4 +1,4 @@
-export default function Home() {
+export default function Explore() {
   return (
     <div style={{
       minHeight: '100vh',
@@ -6,7 +6,7 @@ export default function Home() {
       justifyContent: 'center',
       alignItems: 'center'
     }}>
-      <h1>Home Page</h1>
+      <h1>Explore Page</h1>
     </div>
   );
 }
