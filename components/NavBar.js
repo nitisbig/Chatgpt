@@ -47,6 +47,27 @@ export default function NavBar() {
 
   return (
     <>
+      <Link
+        href="/profile"
+        style={{
+          position: 'fixed',
+          top: '20px',
+          left: '20px',
+          width: '40px',
+          height: '40px',
+          borderRadius: '50%',
+          overflow: 'hidden',
+          background: darkMode ? '#444' : '#f0f0f0',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          textDecoration: 'none',
+          zIndex: 1002
+        }}
+      >
+        <span style={{ fontSize: '20px', color: darkMode ? '#fff' : '#333' }}>👤</span>
+      </Link>
+
       <button
         ref={buttonRef}
         onClick={() => setShowSettings(!showSettings)}
