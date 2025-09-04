@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const navItems = [
   { href: '/', icon: '🏠', label: 'Home' },
@@ -11,6 +11,8 @@ const navItems = [
 export default function NavBar() {
   const [darkMode, setDarkMode] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
+  const buttonRef = useRef(null);
+  const settingsRef = useRef(null);
 
   useEffect(() => {
     if (darkMode) {
@@ -22,14 +24,36 @@ export default function NavBar() {
     }
   }, [darkMode]);
 
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        settingsRef.current &&
+        !settingsRef.current.contains(event.target) &&
+        buttonRef.current &&
+        !buttonRef.current.contains(event.target)
+      ) {
+        setShowSettings(false);
+      }
+    }
+
+    if (showSettings) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showSettings]);
+
   return (
     <>
       <button
+        ref={buttonRef}
         onClick={() => setShowSettings(!showSettings)}
         style={{
           position: 'fixed',
           top: '20px',
-          left: '20px',
+          right: '20px',
           background: 'none',
           border: 'none',
           cursor: 'pointer',
@@ -44,10 +68,11 @@ export default function NavBar() {
 
       {showSettings && (
         <div
+          ref={settingsRef}
           style={{
             position: 'fixed',
             top: '60px',
-            left: '20px',
+            right: '20px',
             background: darkMode ? '#222' : '#fff',
             border: '1px solid',
             borderColor: darkMode ? '#555' : '#ccc',
