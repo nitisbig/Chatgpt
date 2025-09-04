@@ -3,7 +3,10 @@ export default function Home() {
     {
       id: 1,
       title: 'Sample eBook',
-      cover: 'https://via.placeholder.com/200x300?text=eBook+Cover'
+      cover: 'https://via.placeholder.com/200x300?text=eBook+Cover',
+      buyLink:
+        'https://theveller.gumroad.com/l/GPTChain-byTheVeller-x-Misash?layout=discover&recommended_by=search&_gl=1' +
+        '*kxqzoo*_ga*MTMzMzY4ODYwMC4xNzUyMjQ3MzEx*_ga_6LJN6D94N6*czE3NTY5OTQ5NjEkbzYkZzAkdDE3NTY5OTQ5NjEkajYwJGwwJGgw'
     }
   ];
 
@@ -29,18 +32,23 @@ export default function Home() {
             />
             <h3 style={{ margin: '8px 0' }}>{product.title}</h3>
             <div style={{ display: 'flex', gap: '8px', justifyContent: 'center' }}>
-              <button
+              <a
+                href={product.buyLink}
+                target="_blank"
+                rel="noopener noreferrer"
                 style={{
                   backgroundColor: '#0070f3',
                   color: '#fff',
                   border: 'none',
                   padding: '8px 12px',
                   borderRadius: '4px',
-                  cursor: 'pointer'
+                  cursor: 'pointer',
+                  textDecoration: 'none',
+                  display: 'inline-block'
                 }}
               >
                 Buy
-              </button>
+              </a>
               <button
                 style={{
                   backgroundColor: '#f39c12',
