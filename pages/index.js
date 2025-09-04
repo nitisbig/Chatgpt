@@ -3,7 +3,7 @@ export default function Home() {
     {
       id: 1,
       title: 'Sample eBook',
-      cover: 'https://via.placeholder.com/200x300?text=eBook+Cover',
+      cover: 'https://public-files.gumroad.com/g2rc7nnv627pd51mkop3anh1c0us',
       buyLink:
         'https://theveller.gumroad.com/l/GPTChain-byTheVeller-x-Misash?layout=discover&recommended_by=search&_gl=1' +
         '*kxqzoo*_ga*MTMzMzY4ODYwMC4xNzUyMjQ3MzEx*_ga_6LJN6D94N6*czE3NTY5OTQ5NjEkbzYkZzAkdDE3NTY5OTQ5NjEkajYwJGwwJGgw'
