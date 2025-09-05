@@ -9,7 +9,7 @@ export default function Chatbot() {
   const [input, setInput] = useState('');
   const dragStart = useRef({ offsetX: 0, offsetY: 0 });
   const isDragging = useRef(false);
-  const messagesEndRef = useRef(null);
+  const messagesContainerRef = useRef(null);
 
   const toggle = () => {
     setOpen(!open);
@@ -102,8 +102,9 @@ export default function Chatbot() {
   };
 
   useEffect(() => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    const container = messagesContainerRef.current;
+    if (container) {
+      container.scrollTop = container.scrollHeight;
     }
   }, [messages]);
 
@@ -127,7 +128,7 @@ export default function Chatbot() {
             </button>
           </div>
           <div className="chatbot-body">
-            <div className="chatbot-messages">
+            <div className="chatbot-messages" ref={messagesContainerRef}>
               {messages.map((msg, idx) => (
                 <div
                   key={idx}
@@ -136,7 +137,6 @@ export default function Chatbot() {
                   {msg.text}
                 </div>
               ))}
-              <div ref={messagesEndRef} />
             </div>
             <form className="chatbot-input-area" onSubmit={handleSubmit}>
               <input
