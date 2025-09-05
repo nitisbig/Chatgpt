@@ -22,7 +22,7 @@ export default async function handler(req, res) {
 
   try {
     const completion = await client.chat.completions.create({
-      model: 'gpt-3.5-turbo',
+      model: 'openai/gpt-oss-20b',
       messages: [{ role: 'user', content: message }],
     });
 
