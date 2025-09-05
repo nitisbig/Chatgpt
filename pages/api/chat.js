@@ -4,7 +4,12 @@ export default async function handler(req, res) {
   }
 
   const { message } = req.body;
-  const apiKey = process.env.GROQ_API_KEY;
+
+  // Allow using either GROQ_API_KEY or NEXT_PUBLIC_GROQ_API_KEY so the
+  // route works whether the key is defined for server-side use only or
+  // exposed to the client during development.
+  const apiKey =
+    process.env.GROQ_API_KEY || process.env.NEXT_PUBLIC_GROQ_API_KEY;
 
   if (!apiKey) {
     console.error('GROQ_API_KEY is not set');
@@ -25,7 +30,10 @@ export default async function handler(req, res) {
     });
 
     if (!response.ok) {
-      throw new Error(`Groq API responded with ${response.status}`);
+      const errorText = await response.text();
+      throw new Error(
+        `Groq API responded with ${response.status}: ${errorText}`
+      );
     }
 
     const completion = await response.json();
