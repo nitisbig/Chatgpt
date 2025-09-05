@@ -78,13 +78,28 @@ export default function Chatbot() {
     toggle();
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!input.trim()) return;
-    const userMessage = { sender: 'user', text: input };
-    const botMessage = { sender: 'bot', text: 'Thanks for your message!' };
-    setMessages((prev) => [...prev, userMessage, botMessage]);
+    const userText = input;
+    const userMessage = { sender: 'user', text: userText };
+    setMessages((prev) => [...prev, userMessage]);
     setInput('');
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: userText }),
+      });
+      if (!res.ok) throw new Error('Network response was not ok');
+      const data = await res.json();
+      setMessages((prev) => [...prev, { sender: 'bot', text: data.reply }]);
+    } catch (err) {
+      setMessages((prev) => [
+        ...prev,
+        { sender: 'bot', text: 'Sorry, something went wrong.' },
+      ]);
+    }
   };
 
   useEffect(() => {
