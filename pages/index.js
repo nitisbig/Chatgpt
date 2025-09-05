@@ -11,7 +11,13 @@ export default function Home() {
   ];
 
   return (
-    <div style={{ padding: '20px' }}>
+    <div
+      style={{
+        padding: '20px',
+        paddingTop: '80px',
+        paddingLeft: '80px'
+      }}
+    >
       <h1>Product List</h1>
       <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
         {products.map((product) => (

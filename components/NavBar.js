@@ -16,10 +16,10 @@ export default function NavBar() {
 
   useEffect(() => {
     if (darkMode) {
-      document.body.style.background = 'linear-gradient(135deg, #1f1f1f 0%, #3d3d3d 100%)';
+      document.body.style.background = '#1f1f1f';
       document.body.style.color = '#fff';
     } else {
-      document.body.style.background = 'linear-gradient(135deg, #c3ecff 0%, #eafaf1 100%)';
+      document.body.style.background = '#eafaf1';
       document.body.style.color = '#000';
     }
   }, [darkMode]);
