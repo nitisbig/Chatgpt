@@ -1,5 +1,13 @@
 import OpenAI from 'openai';
 
+const apiKey =
+  process.env.GROQ_API_KEY || process.env.NEXT_PUBLIC_GROQ_API_KEY;
+
+const client = new OpenAI({
+  apiKey,
+  baseURL: 'https://api.groq.com/openai/v1',
+});
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -7,18 +15,10 @@ export default async function handler(req, res) {
 
   const { message } = req.body;
 
-  // Allow using either OPENAI_API_KEY or NEXT_PUBLIC_OPENAI_API_KEY so the
-  // route works whether the key is defined for server-side use only or
-  // exposed to the client during development.
-  const apiKey =
-    process.env.OPENAI_API_KEY || process.env.NEXT_PUBLIC_OPENAI_API_KEY;
-
   if (!apiKey) {
-    console.error('OPENAI_API_KEY is not set');
+    console.error('GROQ_API_KEY is not set');
     return res.status(500).json({ error: 'Server misconfiguration' });
   }
-
-  const client = new OpenAI({ apiKey });
 
   try {
     const completion = await client.chat.completions.create({
