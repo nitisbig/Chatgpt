@@ -3,8 +3,13 @@ import { useState, useRef, useEffect } from 'react';
 export default function Chatbot() {
   const [open, setOpen] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [messages, setMessages] = useState([
+    { sender: 'bot', text: 'Hello! How can we help you?' },
+  ]);
+  const [input, setInput] = useState('');
   const dragStart = useRef({ offsetX: 0, offsetY: 0 });
   const isDragging = useRef(false);
+  const messagesEndRef = useRef(null);
 
   const toggle = () => {
     setOpen(!open);
@@ -73,6 +78,21 @@ export default function Chatbot() {
     toggle();
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!input.trim()) return;
+    const userMessage = { sender: 'user', text: input };
+    const botMessage = { sender: 'bot', text: 'Thanks for your message!' };
+    setMessages((prev) => [...prev, userMessage, botMessage]);
+    setInput('');
+  };
+
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [messages]);
+
   const windowStyle = {
     top: position.y - 420,
     left: position.x - 240,
@@ -93,7 +113,27 @@ export default function Chatbot() {
             </button>
           </div>
           <div className="chatbot-body">
-            <p>Hello! How can we help you?</p>
+            <div className="chatbot-messages">
+              {messages.map((msg, idx) => (
+                <div
+                  key={idx}
+                  className={`chatbot-message ${msg.sender}`}
+                >
+                  {msg.text}
+                </div>
+              ))}
+              <div ref={messagesEndRef} />
+            </div>
+            <form className="chatbot-input-area" onSubmit={handleSubmit}>
+              <input
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="Type your message..."
+                aria-label="Chat message"
+              />
+              <button type="submit">Ask</button>
+            </form>
           </div>
         </div>
       )}
