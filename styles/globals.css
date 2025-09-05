@@ -56,6 +56,8 @@ body {
   flex: 1;
   padding: 10px;
   background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  flex-direction: column;
 }
 
 .chatbot-close {
@@ -63,5 +65,49 @@ body {
   border: none;
   color: #fff;
   font-size: 16px;
+  cursor: pointer;
+}
+
+.chatbot-messages {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.chatbot-message {
+  margin-bottom: 8px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  max-width: 80%;
+}
+
+.chatbot-message.user {
+  align-self: flex-end;
+  background: #dcf8c6;
+}
+
+.chatbot-message.bot {
+  align-self: flex-start;
+  background: #f1f0f0;
+}
+
+.chatbot-input-area {
+  display: flex;
+  border-top: 1px solid #ccc;
+}
+
+.chatbot-input-area input {
+  flex: 1;
+  border: none;
+  padding: 8px;
+}
+
+.chatbot-input-area button {
+  background-color: #0070f3;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
   cursor: pointer;
 }
