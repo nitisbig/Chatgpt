@@ -17,9 +17,8 @@ export default function Home() {
         {products.map((product) => (
           <div
             key={product.id}
+            className="glass-card"
             style={{
-              border: '1px solid #ddd',
-              borderRadius: '8px',
               padding: '16px',
               maxWidth: '200px',
               textAlign: 'center'

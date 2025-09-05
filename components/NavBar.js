@@ -16,10 +16,10 @@ export default function NavBar() {
 
   useEffect(() => {
     if (darkMode) {
-      document.body.style.background = '#333';
+      document.body.style.background = 'linear-gradient(135deg, #1f1f1f 0%, #3d3d3d 100%)';
       document.body.style.color = '#fff';
     } else {
-      document.body.style.background = '#fff';
+      document.body.style.background = 'linear-gradient(135deg, #c3ecff 0%, #eafaf1 100%)';
       document.body.style.color = '#000';
     }
   }, [darkMode]);
@@ -57,7 +57,11 @@ export default function NavBar() {
           height: '40px',
           borderRadius: '50%',
           overflow: 'hidden',
-          background: darkMode ? '#444' : '#f0f0f0',
+          background: darkMode ? 'rgba(34,34,34,0.4)' : 'rgba(255,255,255,0.4)',
+          border: '1px solid rgba(255,255,255,0.3)',
+          backdropFilter: 'blur(10px)',
+          WebkitBackdropFilter: 'blur(10px)',
+          boxShadow: '0 4px 30px rgba(0,0,0,0.1)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -94,9 +98,12 @@ export default function NavBar() {
             position: 'fixed',
             top: '60px',
             right: '20px',
-            background: darkMode ? '#222' : '#fff',
+            background: darkMode ? 'rgba(34,34,34,0.4)' : 'rgba(255,255,255,0.4)',
             border: '1px solid',
-            borderColor: darkMode ? '#555' : '#ccc',
+            borderColor: darkMode ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.3)',
+            boxShadow: '0 4px 30px rgba(0,0,0,0.1)',
+            backdropFilter: 'blur(10px)',
+            WebkitBackdropFilter: 'blur(10px)',
             padding: '12px',
             borderRadius: '8px',
             display: 'flex',
@@ -149,9 +156,13 @@ export default function NavBar() {
         bottom: '20px',
         left: '50%',
         transform: 'translateX(-50%)',
-        background: darkMode ? '#222' : '#fff',
+        background: darkMode ? 'rgba(34,34,34,0.4)' : 'rgba(255,255,255,0.4)',
         borderRadius: '12px',
-        boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+        border: '1px solid',
+        borderColor: darkMode ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.3)',
+        boxShadow: '0 4px 30px rgba(0,0,0,0.1)',
+        backdropFilter: 'blur(10px)',
+        WebkitBackdropFilter: 'blur(10px)',
         padding: '8px 16px',
         display: 'flex',
         gap: '16px',
