@@ -4,10 +4,24 @@ export default function Explore() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
 
-  const handleExplore = () => {
-    if (!input.trim()) return;
-    setMessages((prev) => [...prev, input]);
+  const handleExplore = async () => {
+    const text = input.trim();
+    if (!text) return;
+    setMessages((prev) => [...prev, { sender: 'user', text }]);
     setInput('');
+    try {
+      const response = await fetch('/api/explore', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: text }),
+      });
+      const data = await response.json();
+      if (data.reply) {
+        setMessages((prev) => [...prev, { sender: 'ai', text: data.reply }]);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -17,7 +31,7 @@ export default function Explore() {
         padding: '80px 20px 20px',
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center'
+        alignItems: 'center',
       }}
     >
       <h1>Explore Page</h1>
@@ -30,12 +44,12 @@ export default function Explore() {
             height: '300px',
             overflowY: 'auto',
             marginBottom: '12px',
-            background: 'rgba(255,255,255,0.5)'
+            background: 'rgba(255,255,255,0.5)',
           }}
         >
           {messages.map((msg, idx) => (
             <div key={idx} style={{ marginBottom: '8px' }}>
-              {msg}
+              <strong>{msg.sender === 'user' ? 'You' : 'AI'}:</strong> {msg.text}
             </div>
           ))}
         </div>
@@ -49,7 +63,7 @@ export default function Explore() {
               flex: 1,
               padding: '8px',
               borderRadius: '4px',
-              border: '1px solid #ccc'
+              border: '1px solid #ccc',
             }}
           />
           <button
@@ -60,7 +74,7 @@ export default function Explore() {
               border: 'none',
               padding: '8px 16px',
               borderRadius: '4px',
-              cursor: 'pointer'
+              cursor: 'pointer',
             }}
           >
             Explore
