@@ -23,7 +23,15 @@ export default async function handler(req, res) {
   try {
     const completion = await client.chat.completions.create({
       model: 'openai/gpt-oss-20b',
-      messages: [{ role: 'user', content: message }],
+      messages: [
+        {
+          role: 'system',
+          content:
+            'You are supportive ai assistant. Max token 500. You are build by Flowdira ltd. And Your owner is Nitesh. You only answer related to books and it\'s content.',
+        },
+        { role: 'user', content: message },
+      ],
+      max_tokens: 500,
     });
 
     const reply = completion.choices?.[0]?.message?.content || '';
