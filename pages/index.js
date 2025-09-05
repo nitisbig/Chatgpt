@@ -2,7 +2,9 @@ export default function Home() {
   const products = [
     {
       id: 1,
-      title: 'Sample eBook',
+      title: 'Gateway to ai ebook',
+      price: '9.99$',
+      discount: '44%',
       cover: 'https://public-files.gumroad.com/g2rc7nnv627pd51mkop3anh1c0us',
       buyLink:
         'https://theveller.gumroad.com/l/GPTChain-byTheVeller-x-Misash?layout=discover&recommended_by=search&_gl=1' +
@@ -18,7 +20,7 @@ export default function Home() {
         paddingLeft: '80px'
       }}
     >
-      <h1>Product List</h1>
+      <h1>Gateway to ai ebook</h1>
       <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
         {products.map((product) => (
           <div
@@ -36,6 +38,8 @@ export default function Home() {
               style={{ width: '100%', height: 'auto', marginBottom: '12px' }}
             />
             <h3 style={{ margin: '8px 0' }}>{product.title}</h3>
+            <p style={{ margin: '4px 0' }}>Price: {product.price}</p>
+            <p style={{ margin: '4px 0' }}>Special discount {product.discount}</p>
             <div style={{ display: 'flex', gap: '8px', justifyContent: 'center' }}>
               <a
                 href={product.buyLink}
