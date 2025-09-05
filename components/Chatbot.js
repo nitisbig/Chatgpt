@@ -147,7 +147,13 @@ export default function Chatbot() {
                 placeholder="Type your message..."
                 aria-label="Chat message"
               />
-              <button type="submit">Ask</button>
+              <button
+                type="submit"
+                className="chatbot-send"
+                aria-label="Send message"
+              >
+                ➤
+              </button>
             </form>
           </div>
         </div>
