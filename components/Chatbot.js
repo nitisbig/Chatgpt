@@ -54,7 +54,6 @@ export default function Chatbot() {
     startDrag(touch.clientX, touch.clientY);
     window.addEventListener('touchmove', onTouchMove);
     window.addEventListener('touchend', onTouchEnd);
-    e.preventDefault();
   };
 
   const onTouchMove = (e) => {
